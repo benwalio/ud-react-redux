@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 export default class Home extends Component {
     render() {
+        console.log(this.props);
         return (
             <div className='ui raised very padded text container segment' style={{marginTop:'80px'}}>
             <h3 className='ui header'>home</h3>
