@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import ModalOverlay from './ModalOverlay';
 
 export default class Contact extends Component {
   render() {
     return (
       <div>
+        <ModalOverlay />
         <div
           className="ui raised very padded text container segment"
           style={{ marginTop: "80px" }}
