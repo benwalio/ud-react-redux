@@ -1,49 +1,35 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import ModalOverlay from './ModalOverlay';
+import ModalOverlay from "./ModalOverlay";
+import { connect } from "react-redux";
+import { Segment, Container, Header } from "semantic-ui-react";
 
-export default class Contact extends Component {
+class Contact extends Component {
   render() {
+    const cards = this.props.cards;
     return (
       <div>
-        <ModalOverlay />
-        <div
-          className="ui raised very padded text container segment"
-          style={{ marginTop: "80px" }}
-        >
-          <Link to='/bob' className="ui header">bob</Link>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti
-            dolores voluptate rerum quaerat velit ipsa voluptas aut harum,
-            tempora ab nisi perferendis quisquam repudiandae, vel beatae, eum
-            laborum molestias similique.
-          </p>
-        </div>
-        <div
-          className="ui raised very padded text container segment"
-          style={{ marginTop: "80px" }}
-        >
-          <Link to='/aaron' className="ui header">aaron</Link>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti
-            dolores voluptate rerum quaerat velit ipsa voluptas aut harum,
-            tempora ab nisi perferendis quisquam repudiandae, vel beatae, eum
-            laborum molestias similique.
-          </p>
-        </div>
-        <div
-          className="ui raised very padded text container segment"
-          style={{ marginTop: "80px" }}
-        >
-          <Link to='/jess' className="ui header">jess</Link>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti
-            dolores voluptate rerum quaerat velit ipsa voluptas aut harum,
-            tempora ab nisi perferendis quisquam repudiandae, vel beatae, eum
-            laborum molestias similique.
-          </p>
-        </div>
+        {cards.map((card) => {
+          return (
+            <Container text style={{ marginTop: "80px" }} key={card.id}>
+              <Segment padded="very">
+                <Header as="h3">
+                  <Link to={`/${card.title}`}>{card.title}</Link>
+                </Header>
+                <p>{card.body}</p>
+              </Segment>
+            </Container>
+          );
+        })}
       </div>
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    cards: state.cards,
+  };
+};
+
+export default connect(mapStateToProps)(Contact);
